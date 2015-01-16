@@ -110,7 +110,7 @@ namespace librbd {
                            << " parent completion " << m_parent_completion
                            << " extents " << image_extents
                            << dendl;
-    aio_read(m_ictx->parent, image_extents, NULL, &m_copyup_data, m_parent_completion, 0);
+    aio_read(m_ictx->parent, image_extents, NULL, &m_copyup_data, m_parent_completion, 0, true);
   }
 
   void CopyupRequest::rbd_read_from_parent_cb(completion_t cb, void *arg)

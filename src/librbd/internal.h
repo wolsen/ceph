@@ -190,7 +190,8 @@ namespace librbd {
   int aio_read(ImageCtx *ictx, uint64_t off, size_t len,
 	       char *buf, bufferlist *pbl, AioCompletion *c, int op_flags);
   int aio_read(ImageCtx *ictx, const vector<pair<uint64_t,uint64_t> >& image_extents,
-	       char *buf, bufferlist *pbl, AioCompletion *c, int op_flags);
+	       char *buf, bufferlist *pbl, AioCompletion *c, int op_flags,
+	       int force_no_cache = false);
   int aio_flush(ImageCtx *ictx, AioCompletion *c);
   int flush(ImageCtx *ictx);
   int _flush(ImageCtx *ictx);
