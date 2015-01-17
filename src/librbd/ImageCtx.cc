@@ -673,12 +673,4 @@ namespace librbd {
       pending_aio_cond.Wait(aio_lock);
     }
   }
-
-  void ImageCtx::wait_for_pending_copyup() {
-    Mutex::Locker l(copyup_list_lock);
-    while (!copyup_list.empty()) {
-      ldout(cct, 20) << __func__ << " waiting CopyupRequest to be completed" << dendl;
-      copyup_list_cond.Wait(copyup_list_lock);
-    }
-  }
 }

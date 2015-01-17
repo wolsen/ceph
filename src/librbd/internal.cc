@@ -2205,7 +2205,6 @@ reprotect_and_return_err:
     ldout(ictx->cct, 20) << "snap_set " << ictx << " snap = "
 			 << (snap_name ? snap_name : "NULL") << dendl;
 
-    ictx->wait_for_pending_copyup();
     // ignore return value, since we may be set to a non-existent
     // snapshot and the user is trying to fix that
     ictx_check(ictx);
@@ -2281,7 +2280,6 @@ reprotect_and_return_err:
     if (ictx->image_watcher != NULL) {
       ictx->image_watcher->flush_aio_operations();
     }
-    ictx->wait_for_pending_copyup();
     if (ictx->object_cacher) {
       ictx->shutdown_cache(); // implicitly flushes
     } else {

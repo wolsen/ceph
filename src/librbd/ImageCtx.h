@@ -173,7 +173,6 @@ namespace librbd {
     uint64_t prune_parent_extents(vector<pair<uint64_t,uint64_t> >& objectx,
 				  uint64_t overlap);
     void wait_for_pending_aio();
-    void wait_for_pending_copyup();
   };
 }
 
