@@ -158,13 +158,13 @@ namespace librbd {
             }
           }
 
-          read_from_parent(image_extents);
-
-          if (is_copy_on_read(m_ictx, m_snap_id))
+          if (is_copy_on_read(m_ictx, m_snap_id)) {
             m_state = LIBRBD_AIO_READ_COPYUP; 
-          else 
+          } else {
             m_state = LIBRBD_AIO_READ_GUARD;
+	  }
 
+          read_from_parent(image_extents);
           finished = false;
         }
       }
@@ -206,7 +206,7 @@ namespace librbd {
             m_ictx->copyup_list.insert(new_slot);
             m_ictx->copyup_list_lock.Unlock();
 
-            new_req->read_from_parent(m_image_extents);
+            new_req->queue_read_from_parent(m_image_extents);
           }
 //        uint64_t image_overlap = 0;
 //        r = m_ictx->get_parent_overlap(m_snap_id, &image_overlap);
